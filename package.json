@@ -1,0 +1,26 @@
+{
+  "name": "facebook-chat-socket",
+  "version": "0.0.1",
+  "scripts": {
+    "start": "node server.js",
+    "server": "nodemon server.js",
+    "client": "npm run start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
+  },
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "express": "~4.11.2",
+    "mongoose": "^4.12.0",
+    "mysql": "~2.5.5",
+    "react-router": "^4.2.0",
+    "react-router-dom": "^4.2.2",
+    "react-router-native": "^4.2.0",
+    "react-scripts": "^1.0.14",
+    "socket.io": "~1.3.3"
+  },
+  "devDependencies": {
+    "concurrently": "^3.5.0",
+    "nodemon": "^1.12.1"
+  }
+}
