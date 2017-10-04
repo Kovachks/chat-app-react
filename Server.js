@@ -4,7 +4,7 @@ var server = require('http').createServer(app)
 const http    =  require('http').Server(app);
 const io      =  require("socket.io")(server);
 const mongoose = require("mongoose");
-const bodyParser = require("body-parser")
+const bodyParser = require("body-parser");
 
 
 
@@ -49,6 +49,7 @@ io.on('connection',function(socket){
           console.log(status)
         if(res){
             io.emit('refresh feed',status);
+            console.log("emit")
         } else {
             io.emit('error');
         }

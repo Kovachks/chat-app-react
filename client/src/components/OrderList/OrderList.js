@@ -1,13 +1,23 @@
 import React, {Component} from 'react';
 import styles from './OrderList.css';
 import openSocket from 'socket.io-client'
+import API from '../../api/api'
+
+const uri = "http://locathost:8000";
+
 const socket = openSocket('http://localhost:8000');
 
 class OrderList extends Component {
 
     state = {
-        value: ""
+        value: " ",
+        comments: " "
     }
+
+    componentDidMount(){
+        socket.on("refresh feed", function(msg) {
+        })
+      }
 
     handleChange = event => {
         event.preventDefault();
@@ -16,15 +26,10 @@ class OrderList extends Component {
         })
       };
 
-    post = () => {
+    post = (event) => {
+        event.preventDefault()
         socket.emit('status added', this.state.value);
     }
-
-    // refresh = () => {
-    //     socket.on('refresh feed',function(msg){
-    //         console.log(msg)
-    //     }
-    // };
 
     render() {
         return (
@@ -34,7 +39,7 @@ class OrderList extends Component {
                 <input type="submit" value="Submit"/>
                 </form>
                 <div className={styles.show_comments}
-                >
+                >This is a test div
                 </div>
             </div>
         )
