@@ -1,7 +1,8 @@
 const express = require("express")
 const app = express();
+var server = require('http').createServer(app)
 const http    =  require('http').Server(app);
-const io      =  require("socket.io")(http);
+const io      =  require("socket.io")(server);
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser")
 
@@ -45,6 +46,7 @@ io.on('connection',function(socket){
     console.log("A user is connected");
     socket.on('status added',function(status){
       add_status(status,function(res){
+          console.log(status)
         if(res){
             io.emit('refresh feed',status);
         } else {
@@ -65,8 +67,8 @@ const add_status = function (status,callback) {
         });
     };
 
-const PORT = process.env.PORT || 5000;
+const PORT = 8000;
 
-http.listen(PORT,function(){
+server.listen(PORT,function(){
     console.log("Listening on " + PORT);
 });
