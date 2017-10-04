@@ -11,13 +11,16 @@ class OrderList extends Component {
 
     state = {
         value: " ",
-        comments: " "
-    }
-
-    componentDidMount(){
-        socket.on("refresh feed", function(msg) {
+        comments: []
+    };
+    
+    componentDidMount() {
+        socket.on("refresh feed", (msg) => {
+            this.setState({
+                comments: [msg, ...this.state.comments]
+            })
         })
-      }
+    }
 
     handleChange = event => {
         event.preventDefault();
@@ -39,7 +42,7 @@ class OrderList extends Component {
                 <input type="submit" value="Submit"/>
                 </form>
                 <div className={styles.show_comments}
-                >This is a test div
+                >{this.state.comments}
                 </div>
             </div>
         )
